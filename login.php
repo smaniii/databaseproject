@@ -1,10 +1,10 @@
+<?php session_start();?>
 <?php
 try{
     $dbh = new PDO('mysql:host=localhost;dbname=eventtracker', 'root', '');
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $email = htmlentities($_POST["email"]);
     $pass = $_POST["password"];
-    session_start();
     foreach ($dbh->query("SELECT `user_id` , `univ_id` , `pass`, `email` FROM `user`") as $row){
         if($row[3] == $email && $row[2] == $pass) {
             $_SESSION["user_id"] = $row[0];
@@ -14,7 +14,9 @@ try{
     //print_r($_SESSION);
     if(!empty($_SESSION["user_id"])) {
         echo "You have been logged in";
-        //echo $_SESSION["user_id"];
+        echo '<br>';
+        echo $_SESSION["user_id"];
+        echo '<br>';
         echo '<a href="logout.php">logout</a>';
     }
     else {
@@ -29,5 +31,5 @@ catch(PDOException $e)
 }
 
 $dbh = null;
-//header('Location: website.php');
+header('Location: slideshow.php');
 ?>

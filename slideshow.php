@@ -1,6 +1,10 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style>
         * {box-sizing:border-box}
         body {font-family: Verdana,sans-serif;}
@@ -85,8 +89,9 @@
 <?php
 $dbh = new PDO('mysql:host=localhost;dbname=eventtracker', 'root', '');
 $i = 0;
+$uni_id = $_SESSION["univ_id"];
 $arr = array();
-foreach($dbh->query("SELECT `blob_data` FROM `images` WHERE `univ_id` = 2 ") as $row) {
+foreach($dbh->query("SELECT `blob_data` FROM `images` WHERE `univ_id` = '.$uni_id.' ") as $row) {
     $arr[$i] = $row[0];
     $i++;
 }
@@ -101,6 +106,7 @@ foreach ($arr as $hi) {
     $i++;
 }
 ?>
+<a href="logout.php">logout</a>
 <div style="text-align:center">
     <?php
         for($i;$i>0;$i--){
