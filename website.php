@@ -1,6 +1,15 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php
+        if(isset($_SESSION["user_id"])) {
+            header('Location: http://www.google.com/');
+        }
+    ?>
     <meta charset="UTF-8">
     <title>eventplanner</title></title>
 
