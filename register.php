@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php
 try{
         $dbh = new PDO('mysql:host=localhost;dbname=eventtracker', 'root', '');
@@ -5,11 +6,10 @@ try{
         $email = htmlentities($_POST["email"]);
         $pass = $_POST["password"];
         $uni = $_POST["uni"];
-        $query = "INSERT INTO `user` (`user_id`, `univ_id`, `pass`, `email`) VALUES (NULL, '.$uni.', '.$pass.','.$email.')";
+        $query = "INSERT INTO `user` (`user_id`, `univ_id`, `pass`, `email`) VALUES (NULL, '.$uni.', '$pass','$email')";
         $dbh->exec($query);
         echo "you have been added to the db";
         echo "you are now logged in";
-        session_start();
         foreach ($dbh->query("SELECT `user_id` , `univ_id` , `pass`, `email` FROM `user`") as $row){
                 $_SESSION["user_id"] = $row[0];
                 $_SESSION["univ_id"] = $row[1];
@@ -27,5 +27,5 @@ try{
     }
 
     $dbh = null;
-    //header('Location: website.php');
+    header('Location: slideshow.php');
 ?>
