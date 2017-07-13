@@ -1,0 +1,42 @@
+
+body {
+    background-image: url(https://kb5150.files.wordpress.com/2009/11/usc-library2.jpg);
+    background-size: cover;
+    color: white;
+}
+
+form{
+    border: 10px #0000ffff;
+}
+
+input[type = text], input[type=password]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: green;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+html,body {
+    height:100%;
+    width:100%;
+    margin:0;
+}
+body , body {
+    display:flex;
+}
+form {
+    margin:auto;
+}
+
