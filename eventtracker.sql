@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2017 at 02:20 AM
+-- Generation Time: Jul 13, 2017 at 08:36 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -55,16 +55,21 @@ CREATE TABLE `event` (
   `location_id` int(11) NOT NULL,
   `univ_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `category` int(11) NOT NULL,
   `description` text NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `date` date NOT NULL,
-  `contact_phone` int(11) NOT NULL,
+  `contact_phone` varchar(11) NOT NULL,
   `contact_email` varchar(30) NOT NULL,
-  `type` int(11) NOT NULL,
+  `type` varchar(30) NOT NULL,
   `access` int(11) NOT NULL,
   `pending_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`event_id`, `location_id`, `univ_id`, `name`, `description`, `time`, `contact_phone`, `contact_email`, `type`, `access`, `pending_status`) VALUES
+(1, 1, 1, 'UCF tennis tournament ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec purus velit. Nam ultricies massa quis sapien dignissim malesuada. Praesent id dui in sapien ultricies pretium a et lectus. Aliquam a purus at metus ornare consequat. Fusce dapibus, turpis at commodo congue, massa neque consequat est, non imperdiet sem quam ut nulla. Quisque eu mi imperdiet, consectetur elit eu, venenatis erat. Pellentesque malesuada dictum enim, a varius metus bibendum in. Cras malesuada sagittis posuere.\r\n\r\n', '2017-07-14 12:07:30', '9995554444', 's@knights.ucf.edu', 'RSO', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -124,6 +129,38 @@ CREATE TABLE `roster` (
   `is_admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `roster`
+--
+
+INSERT INTO `roster` (`user_id`, `rso_id`, `is_admin`) VALUES
+(2, 1, 1),
+(2, 7, 1),
+(2, 10, 1),
+(2, 12, 1),
+(2, 15, 1),
+(3, 1, 0),
+(3, 7, 0),
+(3, 10, 0),
+(3, 12, 0),
+(3, 15, 0),
+(4, 1, 0),
+(4, 7, 0),
+(4, 10, 0),
+(4, 12, 0),
+(4, 15, 0),
+(5, 1, 0),
+(5, 7, 0),
+(5, 10, 0),
+(5, 12, 0),
+(5, 15, 0),
+(8, 1, 0),
+(8, 7, 0),
+(8, 10, 0),
+(8, 12, 0),
+(8, 15, 0),
+(13, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -137,6 +174,17 @@ CREATE TABLE `rso` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `rso`
+--
+
+INSERT INTO `rso` (`rso_id`, `univ_id`, `name`, `description`) VALUES
+(1, 1, 'UCF Tennis ', 'The ucf tennis club rso. '),
+(7, 1, 'rso test', 'this is an rso '),
+(10, 1, 'rso test1', 'this is an rso '),
+(12, 1, 'rso test2', 'this is an rso '),
+(15, 1, 'rso test3', 'this is an rso ');
+
 -- --------------------------------------------------------
 
 --
@@ -147,6 +195,13 @@ CREATE TABLE `rso_event` (
   `event_id` int(11) NOT NULL,
   `rso_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rso_event`
+--
+
+INSERT INTO `rso_event` (`event_id`, `rso_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -212,10 +267,13 @@ INSERT INTO `user` (`user_id`, `univ_id`, `pass`, `email`) VALUES
 (2, 1, 'dummypass', 'dummy@knights.ucf.edu'),
 (3, 1, 'dummypass', 'anemail@knights.ucf.edu'),
 (4, 1, 'pass', 'e@knights.ucf.edu'),
-(5, 1, '.pass.', '.seth@knights.ucf.edu.'),
-(8, 1, '.pass.', '.seth1@knights.ucf.edu.'),
-(9, 1, '.dummypass.', '.seth2@knights.ucf.edu.'),
-(10, 2, '.testpass.', '.test.bulls.usf.edu.');
+(5, 1, '.pass.', 'seth@knights.ucf.edu'),
+(8, 1, '.pass.', 'seth1@knights.ucf.edu'),
+(9, 1, '.dummypass.', 'seth2@knights.ucf.edu'),
+(10, 2, '.testpass.', 'test.bulls.usf.edu'),
+(11, 2, '.bullpass.', 's@bulls.usf.edu'),
+(12, 2, 'hi', 'email@bulls.ucf.edu'),
+(13, 1, 'p', 's@s.com');
 
 --
 -- Indexes for dumped tables
@@ -260,21 +318,25 @@ ALTER TABLE `location`
 -- Indexes for table `roster`
 --
 ALTER TABLE `roster`
+  ADD UNIQUE KEY `user_id` (`user_id`,`rso_id`),
   ADD KEY `rso_id` (`rso_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `index` (`user_id`);
 
 --
 -- Indexes for table `rso`
 --
 ALTER TABLE `rso`
   ADD PRIMARY KEY (`rso_id`),
+  ADD UNIQUE KEY `name` (`name`),
   ADD KEY `univ_id` (`univ_id`);
 
 --
 -- Indexes for table `rso_event`
 --
 ALTER TABLE `rso_event`
-  ADD KEY `event_id` (`event_id`),
+  ADD UNIQUE KEY `event_id` (`event_id`),
+  ADD UNIQUE KEY `event_id_2` (`event_id`),
+  ADD UNIQUE KEY `event_id_3` (`event_id`,`rso_id`),
   ADD KEY `rso_id` (`rso_id`);
 
 --
@@ -306,7 +368,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `images`
 --
@@ -321,7 +383,7 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `rso`
 --
 ALTER TABLE `rso`
-  MODIFY `rso_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `rso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `university`
 --
@@ -331,7 +393,7 @@ ALTER TABLE `university`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- Constraints for dumped tables
 --
@@ -367,7 +429,8 @@ ALTER TABLE `images`
 -- Constraints for table `roster`
 --
 ALTER TABLE `roster`
-  ADD CONSTRAINT `roster_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `roster_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `roster_ibfk_2` FOREIGN KEY (`rso_id`) REFERENCES `rso` (`rso_id`);
 
 --
 -- Constraints for table `rso`
