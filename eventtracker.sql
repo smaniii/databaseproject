@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2017 at 08:36 PM
+-- Generation Time: Jul 13, 2017 at 09:27 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -19,17 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `eventtracker`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin_event`
---
-
-CREATE TABLE `admin_event` (
-  `event_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE DATABASE IF NOT EXISTS `eventtracker` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `eventtracker`;
 
 -- --------------------------------------------------------
 
@@ -37,6 +28,7 @@ CREATE TABLE `admin_event` (
 -- Table structure for table `comment`
 --
 
+DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `user_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL,
@@ -50,6 +42,7 @@ CREATE TABLE `comment` (
 -- Table structure for table `event`
 --
 
+DROP TABLE IF EXISTS `event`;
 CREATE TABLE `event` (
   `event_id` int(11) NOT NULL,
   `location_id` int(11) NOT NULL,
@@ -77,6 +70,7 @@ INSERT INTO `event` (`event_id`, `location_id`, `univ_id`, `name`, `description`
 -- Table structure for table `images`
 --
 
+DROP TABLE IF EXISTS `images`;
 CREATE TABLE `images` (
   `img_id` int(11) NOT NULL,
   `blob_data` longblob NOT NULL,
@@ -102,6 +96,7 @@ INSERT INTO `images` (`img_id`, `blob_data`, `univ_id`) VALUES
 -- Table structure for table `location`
 --
 
+DROP TABLE IF EXISTS `location`;
 CREATE TABLE `location` (
   `location_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
@@ -123,6 +118,7 @@ INSERT INTO `location` (`location_id`, `name`, `latitude`, `longitude`) VALUES
 -- Table structure for table `roster`
 --
 
+DROP TABLE IF EXISTS `roster`;
 CREATE TABLE `roster` (
   `user_id` int(11) NOT NULL,
   `rso_id` int(11) NOT NULL,
@@ -167,6 +163,7 @@ INSERT INTO `roster` (`user_id`, `rso_id`, `is_admin`) VALUES
 -- Table structure for table `rso`
 --
 
+DROP TABLE IF EXISTS `rso`;
 CREATE TABLE `rso` (
   `rso_id` int(11) NOT NULL,
   `univ_id` int(11) NOT NULL,
@@ -191,6 +188,7 @@ INSERT INTO `rso` (`rso_id`, `univ_id`, `name`, `description`) VALUES
 -- Table structure for table `rso_event`
 --
 
+DROP TABLE IF EXISTS `rso_event`;
 CREATE TABLE `rso_event` (
   `event_id` int(11) NOT NULL,
   `rso_id` int(11) NOT NULL
@@ -206,28 +204,10 @@ INSERT INTO `rso_event` (`event_id`, `rso_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `super_admin`
---
-
-CREATE TABLE `super_admin` (
-  `user_id` int(11) NOT NULL,
-  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `still_admin` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `super_admin`
---
-
-INSERT INTO `super_admin` (`user_id`, `date_added`, `still_admin`) VALUES
-(1, '2017-07-10 17:30:55', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `university`
 --
 
+DROP TABLE IF EXISTS `university`;
 CREATE TABLE `university` (
   `univ_id` int(11) NOT NULL,
   `location_id` int(11) NOT NULL,
@@ -251,6 +231,7 @@ INSERT INTO `university` (`univ_id`, `location_id`, `name`, `email_domain`, `des
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `univ_id` int(11) NOT NULL,
@@ -278,13 +259,6 @@ INSERT INTO `user` (`user_id`, `univ_id`, `pass`, `email`) VALUES
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admin_event`
---
-ALTER TABLE `admin_event`
-  ADD KEY `event_id` (`event_id`),
-  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `comment`
@@ -340,12 +314,6 @@ ALTER TABLE `rso_event`
   ADD KEY `rso_id` (`rso_id`);
 
 --
--- Indexes for table `super_admin`
---
-ALTER TABLE `super_admin`
-  ADD KEY `user_id` (`user_id`);
-
---
 -- Indexes for table `university`
 --
 ALTER TABLE `university`
@@ -399,13 +367,6 @@ ALTER TABLE `user`
 --
 
 --
--- Constraints for table `admin_event`
---
-ALTER TABLE `admin_event`
-  ADD CONSTRAINT `admin_event_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`),
-  ADD CONSTRAINT `admin_event_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
-
---
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
@@ -444,12 +405,6 @@ ALTER TABLE `rso`
 ALTER TABLE `rso_event`
   ADD CONSTRAINT `rso_event_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`),
   ADD CONSTRAINT `rso_event_ibfk_2` FOREIGN KEY (`rso_id`) REFERENCES `rso` (`rso_id`);
-
---
--- Constraints for table `super_admin`
---
-ALTER TABLE `super_admin`
-  ADD CONSTRAINT `super_admin_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `university`
