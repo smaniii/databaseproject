@@ -7,7 +7,7 @@
 <head>
     <?php
         if(isset($_SESSION["user_id"])) {
-            header('Location: http://www.google.com/');
+            header('Location: http://localhost/db_project/slideshow.php');
         }
     ?>
     <meta charset="UTF-8">
@@ -23,11 +23,11 @@
         <h2>Log In</h2>
         <p>
             School Email:
-            <input type = "text" name = "email" placeholder = "Enter email" size = "15" maxlength = "30"/>
+            <input type = "text" name = "email" placeholder = "Enter email" size = "15" maxlength = "30" required/>
         </p>
         <p>
             Password:
-            <input type = "password" name = "password" size = "15" maxlength = "30"/>
+            <input type = "password" name = "password" size = "15" maxlength = "30" required/>
         </p>
         <br><button type = "submit">Log In</button>
     </div>
@@ -39,7 +39,7 @@
     <h2>Create Account</h2>
     <p>
         School Email:
-        <input type = "text" name = "email" placeholder = "Enter email" size = "15" maxlength = "30"/>
+        <input type = "text" name = "email" placeholder = "Enter email" size = "15" maxlength = "30" required>
     </p>
      <p>
          School Name:
@@ -55,12 +55,12 @@
      </p>
     <p>
         Password:
-        <input type = "password" name = "password" size = "15" maxlength = "30"/>
+        <input type = "password" name = "password" size = "15" maxlength = "30" required/>
     </p>
 
     <p>
         Verify Password:
-        <input type = "password" name = "password" size = "15" maxlength = "30"/>
+        <input type = "password" name = "password" size = "15" maxlength = "30" required/>
     </p>
 
     <br><button type = "submit">Create Account</button>
