@@ -12,6 +12,12 @@
             position: relative;
             margin: auto;
         }
+        #t1 {
+            min-width: 500px;
+            min-height: 500px;
+            position: relative;
+            margin: auto;
+        }
 
         /* Caption text */
         .text {
@@ -75,7 +81,7 @@
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<p id="hi">hello</p>
+
 <?php
 $dbh = new PDO('mysql:host=localhost;dbname=eventtracker', 'root', '');
 $i = 0;
@@ -90,7 +96,7 @@ foreach($dbh->query("SELECT `blob_data` FROM `images` WHERE `univ_id` = 2 ") as 
 $i=0;
 foreach ($arr as $hi) {
 
-    echo '<img class="mySlides fade" src="data:image/jpeg;base64,' . base64_encode($hi) . '"/>';
+    echo '<img class="mySlides fade" id="'.$i.'" src="data:image/jpeg;base64,' . base64_encode($hi) . '"/>';
     echo '<br><br>';
     $i++;
 }
@@ -102,8 +108,12 @@ foreach ($arr as $hi) {
         }
     ?>
 </div>
+<div id="t1">
+
+</div>
 <script>
     var slideIndex = 0;
+    var slideindex = 0;
     showSlides();
 
     function showSlides() {
@@ -114,11 +124,15 @@ foreach ($arr as $hi) {
             slides[i].style.display = "none";
         }
         slideIndex++;
+        slideindex++;
         if (slideIndex> slides.length) {slideIndex = 1}
+        if (slideindex> slides.length) {slideindex = 1}
         for (i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");
         }
-        slides[slideIndex-1].style.display = "block";
+        //slides[slideIndex-1].style.display = "block";
+        var src = document.getElementById(slideindex-1).getAttribute('src');
+        $('body').css('backgroundImage','url('+src+')');
         dots[slideIndex-1].className += " active";
         setTimeout(showSlides, 2000); // Change image every 2 seconds
     }
