@@ -11,7 +11,6 @@ try{
             $_SESSION["univ_id"] = $row[1];
         }
     }
-    //print_r($_SESSION);
     if(!empty($_SESSION["user_id"])) {
         echo "You have been logged in";
         echo '<br>';

@@ -89,6 +89,9 @@
 <?php
 $dbh = new PDO('mysql:host=localhost;dbname=eventtracker', 'root', '');
 $i = 0;
+if(!isset($_SESSION["univ_id"])){
+    header("location: logout.php");
+}
 $uni_id = $_SESSION["univ_id"];
 $arr = array();
 foreach($dbh->query("SELECT `blob_data` FROM `images` WHERE `univ_id` = '.$uni_id.' ") as $row) {
@@ -106,6 +109,7 @@ foreach ($arr as $hi) {
     $i++;
 }
 ?>
+
 <a href="logout.php">logout</a>
 <div style="text-align:center">
     <?php

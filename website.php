@@ -25,6 +25,7 @@
             School Email:
             <input type = "text" name = "email" placeholder = "Enter email" size = "15" maxlength = "30" required/>
         </p>
+
         <p>
             Password:
             <input type = "password" name = "password" size = "15" maxlength = "30" required/>
