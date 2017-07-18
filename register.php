@@ -18,6 +18,7 @@ try{
         //echo $_SESSION["user_id"];
         //echo $_SESSION["univ_id"];
         echo '<a href="logout.php">logout</a>';
+        header('Location: test.php');
     }
     catch(PDOException $e)
     {
@@ -27,5 +28,4 @@ try{
     }
 
     $dbh = null;
-    header('Location: slideshow.php');
 ?>

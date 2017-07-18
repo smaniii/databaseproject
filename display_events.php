@@ -11,6 +11,8 @@ if(!isset($_SESSION))
  */
 ?>
 <?php
+    echo "<a href = 'test.php'>Dashboard</a>";
+    echo "<br>";
     echo "Events that you can go to" . "<br>";
     echo "Events open to all people". "<br>";
 ?>

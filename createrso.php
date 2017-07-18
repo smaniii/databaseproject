@@ -51,6 +51,7 @@ try {
 
     if($dbh->exec($query)){
         echo "your rso has been added thank you";
+        header("location: test.php");
     }
     else {
         echo "your rso name is already taken please type in something else";

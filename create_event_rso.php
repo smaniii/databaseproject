@@ -29,6 +29,7 @@ $query = "INSERT INTO `rso_event`(`rso_event_id`, `location_id`, `univ_id`, `rso
 
 if($dbh->exec($query)){
     echo "You have added an event";
+    header("location:test.php");
 }
 else{
     echo "The event date-time and location are the same as another event or the name of the event is already taken";

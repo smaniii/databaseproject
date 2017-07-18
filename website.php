@@ -7,7 +7,7 @@
 <head>
     <?php
         if(isset($_SESSION["user_id"])) {
-            header('Location: http://localhost/db_project/slideshow.php');
+            header('Location: http://localhost/db_project/test.php');
         }
     ?>
     <meta charset="UTF-8">

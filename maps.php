@@ -34,6 +34,8 @@ foreach($dbh->query("SELECT  `latitude`,longitude FROM `location` WHERE `name` =
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCsLghbSDkMpohovycONY3GUHlrwe9XnY&callback=myMap"></script>
 
+ <a href = "test.php">Dashboard</a>
+
 </body>
 </html>
 

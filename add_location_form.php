@@ -16,11 +16,11 @@ if(!isset($_SESSION))
     <input type = "text" name = "name" placeholder = "Enter location name" size = "15" maxlength = "30" required/>
     </p>
     <p>
-    Type in location longitude:
+    Type in location longitude degree North:
     <input type = "text" name = "lon" placeholder = "Enter location longitude" size = "15" maxlength = "30" required type="number" step="0.01"/>
     </p>
     <p>
-    Enter location latitude:
+    Enter location latitude degree West:
     <input type = "text" name = "lat" placeholder = "Enter location latitude" size = "15" maxlength = "30" required type="number" step="0.01"/>
     </p>
     <button type = "submit">Add location</button>

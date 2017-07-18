@@ -17,8 +17,11 @@ $dbh = new PDO('mysql:host=localhost;dbname=eventtracker', 'root', '');
 $query = "INSERT INTO `location` (`location_id`, `name`, `latitude`, `longitude`) VALUES ('','$name', '$lon', '$lat')";
 if($dbh->exec($query)){
     echo "You have added a location";
+    header("location: test.php");
 }
 else{
     echo "The location is already added to the db";
+    header("location: add_location_form.php");
+
 }
 ?>

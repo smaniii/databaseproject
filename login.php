@@ -17,9 +17,11 @@ try{
         echo $_SESSION["user_id"];
         echo '<br>';
         echo '<a href="logout.php">logout</a>';
+        header('Location: test.php');
     }
     else {
         echo "invalid username or pass";
+        header('Location: website.php');
     }
 }
 catch(PDOException $e)
@@ -27,8 +29,8 @@ catch(PDOException $e)
     echo $query . "<br>" . $e->getMessage();
     echo '<br><br>';
     echo "invalid username or password";
+    header('Location: website.php');
 }
 
 $dbh = null;
-header('Location: slideshow.php');
 ?>

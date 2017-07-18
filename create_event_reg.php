@@ -28,6 +28,7 @@
 
     if($dbh->exec($query)){
         echo "You have added an event";
+        header("location: test.php");
     }
     else{
         echo "The event date-time and location are the same";
